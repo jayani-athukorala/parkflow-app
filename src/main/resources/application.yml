@@ -1,0 +1,28 @@
+server:
+  port: ${PORT:8080}
+  address: 0.0.0.0
+spring:
+  application:
+    name: parking-app-api
+  datasource:
+    url: ${JDBC_DATABASE_URL:jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:parkingdb}}
+    username: ${DB_USERNAME:parking}
+    password: ${DB_PASSWORD:parking}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
+app:
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173}
